@@ -73,7 +73,7 @@ function SignFrame({ gloss, active }: SignFrameProps) {
           <div className="sign-placeholder__orbit" />
           <div className="sign-placeholder__gesture" />
           <span className="sign-placeholder__label">{gloss.label[0]}</span>
-          <span className="sign-placeholder__hint">{hasError ? 'load error' : 'asset pending'}</span>
+          <span className="sign-placeholder__hint">Video not added yet</span>
         </div>
       )}
     </div>
@@ -264,7 +264,7 @@ export function SignPlayer({ glosses, intervalMs = 2000, onClose }: SignPlayerPr
       <div className="sign-player__disclaimer">
         <span className="eyebrow">Demo vocabulary · {total} concept{total !== 1 ? 's' : ''}</span>
         <span style={{ color: 'hsl(var(--muted-foreground))', fontSize: 9 }}>
-          Placeholder frames shown — real ISL assets to be connected
+          Demo preview only · authentic ISL videos will be added later
         </span>
       </div>
     </div>
@@ -334,9 +334,14 @@ export function TextToISLPanel({ initialText = '' }: TextToISLPanelProps) {
               <span className="eyebrow">Outside demo vocabulary</span>
               <p>
                 No supported ISL concepts were found in <em>"{submitted}"</em>.
-                The current demo vocabulary covers: HELLO, HELP, WATER, PLEASE, YES, NO, GO, EAT.
+                Supported vocabulary is listed in the sign mapper.
               </p>
             </div>
+          )}
+          {result.matched && result.unsupported.length > 0 && (
+            <p className="text-to-isl-unsupported" role="status">
+              Not mapped in this demo: {result.unsupported.join(', ')}
+            </p>
           )}
         </div>
       )}
